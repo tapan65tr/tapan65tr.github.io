@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
+
+    <div style="background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center;">
+        
+        <h1 style="color: #333; margin-bottom: 20px; font-size: 24px;">QR Code Generator</h1>
+
+        <div style="margin-bottom: 20px;">
+            <label for="qrText" style="display: block; text-align: left; margin-bottom: 8px; color: #555; font-weight: bold;">Enter Text or URL:</label>
+            <input type="text" id="qrText" placeholder="Type something here..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; transition: border-color 0.3s;">
+        </div>
+
+        <button id="generateBtn" onclick="generateQR()" style="background-color: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer; width: 100%; font-weight: bold; transition: background-color 0.3s;">Generate QR Code</button>
+
+        <div id="qrcode" style="margin-top: 30px; display: flex; justify-content: center; height: 200px; align-items: center;">
+            <span style="color: #999;">QR Code preview</span>
+        </div>
+
+        <a id="downloadLink" href="#" style="display: none; margin-top: 20px; text-decoration: none; background-color: #28a745; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold;">Download QR Code</a>
+
+    </div>
+
+    <script>
+        // Function to Generate QR Code
+        function generateQR() {
+            var text = document.getElementById("qrText").value;
+            var qrContainer = document.getElementById("qrcode");
+            var downloadLink = document.getElementById("downloadLink");
+
+            // Check if input is empty
+            if (text.trim() === "") {
+                alert("Please enter some text first!");
+                return;
+            }
+
+            // Clear previous QR code
+            qrContainer.innerHTML = "";
+
+            // Generate new QR code using the library
+            var qrcode = new QRCode(qrContainer, {
+                text: text,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            // Wait a moment for the canvas to be drawn, then update download link
+            setTimeout(function() {
+                var canvas = qrContainer.querySelector("canvas");
+                if (canvas) {
+                    var imgUrl = canvas.toDataURL("image/png");
+                    downloadLink.href = imgUrl;
+                    downloadLink.download = "qrcode.png";
+                    downloadLink.style.display = "inline-block"; // Show the download button
+                } else {
+                    // Fallback for some browsers if canvas isn't used by library
+                    var img = qrContainer.querySelector("img");
+                    if (img) {
+                        downloadLink.href = img.src;
+                        downloadLink.download = "qrcode.png";
+                        downloadLink.style.display = "inline-block";
+                    }
+                }
+            }, 500); // Small delay to ensure QR is rendered
+        }
+
+        // Function to Clear Input
+        function clearInput() {
+            var input = document.getElementById("qrText");
+            input.value = "";
+            input.focus();
+            document.getElementById("qrcode").innerHTML = '<span style="color: #999;">QR Code preview</span>';
+            document.getElementById("downloadLink").style.display = "none";
+        }
+
+        // Keyboard Shortcuts Logic
+        document.addEventListener("keydown", function(event) {
+            // Alt + G: Generate
+            if (event.altKey && event.key.toLowerCase() === "g") {
+                event.preventDefault(); // Stop default browser action
+                generateQR();
+            }
+
+            // Alt + D: Download
+            if (event.altKey && event.key.toLowerCase() === "d") {
+                event.preventDefault(); // Stop default browser action (like focusing address bar)
+                var downloadBtn = document.getElementById("downloadLink");
+                if (downloadBtn.style.display !== "none") {
+                    downloadBtn.click();
+                } else {
+                    alert("Generate a QR code first!");
+                }
+            }
+
+            // Alt + C: Clear Input
+            if (event.altKey && event.key.toLowerCase() === "c") {
+                event.preventDefault();
+                clearInput();
+            }
+        });
+    </script>
+</body>
+</html>
