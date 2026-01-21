@@ -1,98 +1,220 @@
-<!doctype html>
-<html>
-<title>Keystrokes of excel</title>
-<head>jaws keystrokes</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapan Roy | Accessibility & Tech Enthusiast</title>
+    
+    <style>
+        /* Basic Design & Accessibility CSS */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Skip Link Style (Hidden until focused) */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* Jokhon Tab mere focus kora hobe, tokhon eta samne ashbe */
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Header Design */
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        /* Navigation Menu */
+        nav {
+            background: #444;
+            padding: 10px;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        /* Focus State (Khub Important Accessibility-r jonyo) */
+        a:focus, button:focus, input:focus, textarea:focus {
+            outline: 3px solid #ffcc00;
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* Main Content Area */
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            min-height: 80vh;
+        }
+
+        section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-left: 5px solid #2c3e50;
+            padding-left: 10px;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #2c3e50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
 <body>
-<p>
-Say a list of some common Excel shortcuts  JAWSKey+W
-<br>
-Say the coordinates of the current cell  JAWSKey+C
-<br>
-Say a cell's formula  Insert+control+F2
-<br>
-Put the cell's formula in the virtual viewer Insert+control+F2 twice quickly
-<br>
-Say the row title  JAWSKey+Alt+Shift+R
-<br>
-Say the column title  JAWSKey+Alt+Shift+C
-<br>
-Say the row total  JAWSKey+ExtendedDelete
-<br>
-Say the column total  JAWSKey+NumPadEnter
-<br>
-Set the Row Titles Range  JAWSKey+control+Alt+r
-<br>
-Set the Column Titles Range  JAWSKey+control+Alt+c
-<br>
-Set up to 10 monitor cells for the current worksheet  JAWSKey+Shift+1 through 0 on the number row
-<br>
-Say any of the ten monitor cells for this sheet  Alt+Shift+1 through 0 on the number row
-<br>
-Move to a monitor cell  control+Shift+m
-<br>
-Return to the last cell which had focus before moving to a monitor Cell  control+Shift+GraveAccent
-<br>
-Set a Cell Marker/Place Marker control+Windows+k
-<br>
-Select Cells between existing Cell Marker and current cell  Insert+Space, M
-<br>
-Review selected cells  Shift+Insert+ExtendedDownArrow
-<br>
-Move to Cell Marker location in current sheet  Shift+Alt+Windows+k
-<br>
-Move to next available Cell Marker in a subsequent sheet  Alt+Shift+K
-<br>
-Move to previous available Cell  Marker in a prior sheet  control+Windows+Shift+k
-<br>
-List all Cell Markers in current book  control+ALT+Windows+k
-<br>
-Move to the prior or next worksheet  control+page up or control+page down
-<br>
-Move to a particular worksheet  control+Shift+S
-<br>
-Manage worksheets, such as changing the current sheet name  JAWSKey+Shift+s
-<br>
-List cells with notes on the current worksheet  control+Shift+Apostrophe
-<br>
-Say a cell's note or comment if visible  Alt+Shift+Apostrophe
-<br>
-List cells with formulas  JAWSKey+Shift+f
-<br>
-List cells with data visible in the active window  control+Shift+D
-<br>
-List cells with data in the current row  JAWSKey+Shift+R
-<br>
-List cells with data in the current column  JAWSKey+Shift+C
-<br>
-List cells at horizontal and vertical PageBreaks  control+Shift+B
-<br>
-Select an object on the worksheet  control+Shift+O
-<br>
-Show the content of a textbox on the worksheet  control+Shift+t
-<br>
-Select the active chart on the current workshsheet  Insert+ALT+c
-<br>
-Display the active selected chart in the virtual viewer  control+JAWSKey+c.
-<br>
-Select a hyperlink on the worksheet  JAWSKey+F7
-<br>
-Say the hyperlink address for a cell containing a hyperlink  Alt+Shift+H
-<br>
-Describe the border of the active cell  Alt+Shift+B
-<br>
-Announce the coordinates of the range of cells visible in the active window  Alt+Shift+V
-<br>
-Say the status of gridlines in the active window  Alt+Shift+G
-<br>
-Show the context of a textbox object  control+Shift+t
-<br>
-Select Prior worksheet  control+Shift+ExtendedPageUp
-<br>
-Select next worksheet  control+Shift+ExtendedPageDown
-<br>
-Set Quick Settings  JAWSKey+V
-<br>
-Ask FSCompanion JAWSKey+Space, F1
-</p>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <h1>Tapan Roy</h1>
+        <p>Student | Tech Enthusiast | Accessibility Advocate</p>
+    </header>
+
+    <nav role="navigation" aria-label="Main Menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">My Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content" role="main">
+        
+        <section id="home">
+            <h2>Welcome to My Digital World</h2>
+            <p>Hello friends! Welcome to my official website. This is an accessible space where I share my knowledge about Technology, Linux, and Screen Readers.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>My name is <strong>Tapan Roy</strong>. I am a student at <em>Rabindra Bharati University</em>. I am passionate about making technology accessible for everyone.</p>
+            <ul>
+                <li><strong>Location:</strong> Alipurduar, West Bengal</li>
+                <li><strong>Interests:</strong> Coding, Linux (Accessible Coconut), VBScript, and Bengali Literature.</li>
+                <li><strong>Tools I Use:</strong> JAWS, NVDA, Orca.</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects & Resources</h2>
+            <p>Here you can find some of the tools and scripts I have created.</p>
+            
+            <article>
+                <h3>1. YouTube Video Downloader (VBScript)</h3>
+                <p>A simple script to download videos directly using a link.</p>
+                <a href="#">Download Script (Coming Soon)</a>
+            </article>
+
+            <article>
+                <h3>2. Linux Accessibility Guide</h3>
+                <p>How to set up Orca on Linux distributions.</p>
+                <a href="#">Read Guide</a>
+            </article>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out to me.</p>
+            
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 Tapan Roy. All Rights Reserved.</p>
+        <p>Built with accessible HTML & CSS.</p>
+    </footer>
+
 </body>
 </html>
