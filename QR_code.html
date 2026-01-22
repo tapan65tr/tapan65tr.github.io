@@ -3,18 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-    <title>Simple QR Code Generator</title>
+    <title>Ultimate Accessible QR Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --bg: #f4f4f9;
+            --text: #222;
+            --error: #d9534f;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        /* Main Layout */
+        .main-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { text-align: center; color: var(--primary); margin-bottom: 10px; }
+        
+        /* Description Section */
+        .description-box {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+        }
+        .description-box h2 { margin-top: 0; font-size: 1.2rem; }
+        .description-box p { margin-bottom: 10px; font-size: 0.95rem; }
+        .shortcuts-info { font-size: 0.9rem; font-weight: bold; color: #555; }
+
+        /* Forms */
+        .form-group { margin-bottom: 20px; }
+        
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: bold; 
+            font-size: 1.1em;
+        }
+        
+        select, input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #777;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #fff;
+            color: #000;
+            box-sizing: border-box; /* Important for padding */
+        }
+        
+        select:focus, input:focus, textarea:focus {
+            outline: 3px solid var(--primary);
+            border-color: var(--primary);
+        }
+
+        textarea { resize: vertical; height: 100px; }
+
+        /* Country Row */
+        .country-row { display: flex; gap: 10px; }
+        .country-select-wrapper { flex: 7; }
+        .country-code-wrapper { flex: 3; }
+        
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #004494; }
+        button:focus { outline: 4px solid #ffbf00; } /* High contrast focus */
+        
+        #downloadBtn { 
+            background-color: #28a745; 
+            display: none; 
+            margin-top: 20px;
+        }
+
+        /* QR Display */
+        #qrcode {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #555;
+            min-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            margin: -1px; padding: 0;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+    </style>
 </head>
-<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
-
-    <div style="background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center;">
-
-<a href="#qrText">Skip to content</a>
-
+<body>
+<a href="#qrType">Skip to content</a>
     <header role="banner">
         <h1>Tapan Roy</h1>
         <p>Tech & Accessibility Focused</p>
@@ -30,116 +140,88 @@
     </nav>
 
 <main>
-<h1 style="color: #333; margin-bottom: 20px; font-size: 24px;">QR Code Generator</h1>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="qrText" style="display: block; text-align: left; margin-bottom: 8px; color: #555; font-weight: bold;">Enter Text or URL:</label>
-            <input type="text" id="qrText" placeholder="Type something here..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; transition: border-color 0.3s;">
+    <div class="main-wrapper">
+        <h1>Ultimate Accessible QR Generator</h1>
+
+        <div role="form" aria-label="QR Code Generator Form">
+            
+            <div class="form-group">
+                <label for="qrType">1. Select QR Code Type (Alt+M):</label>
+                <select id="qrType" accesskey="m">
+                    <option value="text">Plain Text</option>
+                    <option value="url">Website URL</option>
+                    <option value="whatsapp">WhatsApp (Direct Message)</option>
+                    <option value="phone">Phone Call</option>
+                    <option value="email">Email Message</option>
+                    <option value="wifi">Wi-Fi Network Config</option>
+<option value="upi">UPI Payment</option>
+<option value="sms">SMS Message</option>
+<option value="vcard">Contact (vCard)</option>
+<option value="event">Calendar Event</option>
+<option value="geo">Location (Geo)</option>
+<option value="crypto">Cryptocurrency</option>
+                </select>
+            </div>
+
+            <div id="dynamicInputs" aria-live="polite">
+                </div>
+
+            <hr aria-hidden="true" style="margin: 30px 0; border-top: 1px solid #ccc;">
+
+            <h3>2. Customize Appearance</h3>
+            
+            <div class="form-group">
+                <label for="colorDark">QR Foreground Color:</label>
+                <select id="colorDark">
+                    <option value="#000000" selected>Black</option>
+                    <option value="#0000FF">Blue</option>
+                    <option value="#FF0000">Red</option>
+                    <option value="#008000">Green</option>
+                    <option value="#800080">Purple</option>
+                    <option value="#A52A2A">Brown</option>
+                    <option value="#00008B">Dark Blue</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="colorLight">Background Color:</label>
+                <select id="colorLight">
+                    <option value="#ffffff" selected>White</option>
+                    <option value="#FFFF00">Yellow</option>
+                    <option value="#E0FFFF">Light Cyan</option>
+                    <option value="#F0F8FF">Alice Blue</option>
+                    <option value="#F5F5DC">Beige</option>
+                    <option value="#000000">Black (Inverted)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="qrSize">Resolution Size:</label>
+                <select id="qrSize">
+                    <option value="256" selected>Medium (Standard)</option>
+                    <option value="512">Large (High Quality)</option>
+                    <option value="1024">Extra Large (HD)</option>
+                </select>
+            </div>
+
+            <button id="generateBtn" accesskey="g">Generate QR Code (Alt+G)</button>
+            
+            <div id="qrcode" role="img" aria-label="QR Code preview will appear here"></div>
+            
+            <button id="downloadBtn" accesskey="d">Download QR Code (Alt+D)</button>
         </div>
-
-        <button id="generateBtn" onclick="generateQR()" style="background-color: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer; width: 100%; font-weight: bold; transition: background-color 0.3s;">Generate QR Code</button>
-
-        <div id="qrcode" style="margin-top: 30px; display: flex; justify-content: center; height: 200px; align-items: center;">
-            <span style="color: #999;">QR Code preview</span>
-        </div>
-
-        <a id="downloadLink" href="#" style="display: none; margin-top: 20px; text-decoration: none; background-color: #28a745; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold;">Download QR Code</a>
-
     </div>
-</main>
 
-    <script>
-        // Function to Generate QR Code
-        function generateQR() {
-            var text = document.getElementById("qrText").value;
-            var qrContainer = document.getElementById("qrcode");
-            var downloadLink = document.getElementById("downloadLink");
-
-            // Check if input is empty
-            if (text.trim() === "") {
-                alert("Please enter some text first!");
-                return;
-            }
-
-            // Clear previous QR code
-            qrContainer.innerHTML = "";
-
-            // Generate new QR code using the library
-            var qrcode = new QRCode(qrContainer, {
-                text: text,
-                width: 200,
-                height: 200,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
-
-            // Wait a moment for the canvas to be drawn, then update download link
-            setTimeout(function() {
-                var canvas = qrContainer.querySelector("canvas");
-                if (canvas) {
-                    var imgUrl = canvas.toDataURL("image/png");
-                    downloadLink.href = imgUrl;
-                    downloadLink.download = "qrcode.png";
-                    downloadLink.style.display = "inline-block"; // Show the download button
-                } else {
-                    // Fallback for some browsers if canvas isn't used by library
-                    var img = qrContainer.querySelector("img");
-                    if (img) {
-                        downloadLink.href = img.src;
-                        downloadLink.download = "qrcode.png";
-                        downloadLink.style.display = "inline-block";
-                    }
-                }
-            }, 500); // Small delay to ensure QR is rendered
-        }
-
-        // Function to Clear Input
-        function clearInput() {
-            var input = document.getElementById("qrText");
-            input.value = "";
-            input.focus();
-            document.getElementById("qrcode").innerHTML = '<span style="color: #999;">QR Code preview</span>';
-            document.getElementById("downloadLink").style.display = "none";
-        }
-
-        // Keyboard Shortcuts Logic
-        document.addEventListener("keydown", function(event) {
-            // Alt + G: Generate
-            if (event.altKey && event.key.toLowerCase() === "g") {
-                event.preventDefault(); // Stop default browser action
-                generateQR();
-            }
-
-            // Alt + D: Download
-            if (event.altKey && event.key.toLowerCase() === "d") {
-                event.preventDefault(); // Stop default browser action (like focusing address bar)
-                var downloadBtn = document.getElementById("downloadLink");
-                if (downloadBtn.style.display !== "none") {
-                    downloadBtn.click();
-                } else {
-                    alert("Generate a QR code first!");
-                }
-            }
-
-            // Alt + C: Clear Input
-            if (event.altKey && event.key.toLowerCase() === "c") {
-                event.preventDefault();
-                clearInput();
-            }
-        });
-    </script>
+<script src="qrcode.js"></script>
 
         <footer role="contentinfo">
-<address>
 <section id="contact">
             <h2>Contact Me</h2>                        
-            <a href="mailto:tapan4563dj@gmail.com">Send mail</a>
+            <address><a href="mailto:tapan4563dj@gmail.com">Send mail</a></address>
             <p>Social media link</p>
             <a href="https://www.facebook.com/tapan65str">FaceBook</a>
             <a href="https://instagram.com/tapan.str">Instagram</a>
             <a href="https://wa.me/918250353859?text=hi">WhatsApp</a>
-</address>
 
             <p>Feel free to reach out to me.</p>            
             <form action="https://formsubmit.co/tapan4563dj@gmail.com" method="POST">
@@ -160,13 +242,11 @@
 
                 <button type="submit">Send Message</button>
             </form>
-        </section>
    
         <p>&copy; 2026 Tapan Roy. All Rights Reserved.</p>
         <p>Designed for everyone. Accessible to all.</p>
+</section
     </footer>
 
 </body>
-
 </html>
-
